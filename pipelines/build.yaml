@@ -1,15 +1,15 @@
 steps:
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', 'grc.io/${_FIREBASE_PROJECT_ID}/firebase', './dockerfiles/firebase']
-  - name: 'node:18.13.0'
+    args: ['build', '-t', 'gcr.io/${_FIREBASE_PROJECT_ID}/firebase', './dockerfiles/firebase']
+  - name: 'gcr.io/${_FIREBASE_PROJECT_ID}/firebase'
     entrypoint: 'npm'
     args: ['install']
-  - name: 'node:18.13.0'
+  - name: 'gcr.io/${_FIREBASE_PROJECT_ID}/firebase'
     entrypoint: 'npm'
     args: ['run', 'build']
   - name: 'gcr.io/${_FIREBASE_PROJECT_ID}/firebase'
     args: ['use', '${_FIREBASE_PROJECT_ID}', '--token', '${_FIREBASE_TOKEN}']
-  - name: 'frc.io/${_FIREBASE_PROJECT_ID}/firebase'
+  - name: 'gcr.io/${_FIREBASE_PROJECT_ID}/firebase'
     args: ['target:apply', 'hosting', 'fuelio-app', 'fuelio-app', '--token', '${_FIREBASE_TOKEN}']
   - name: 'gcr.io/${_FIREBASE_PROJECT_ID}/firebase'
     args: ['deploy', '--token', '${_FIREBASE_TOKEN}', '--only', 'hosting:fuelio-app']
