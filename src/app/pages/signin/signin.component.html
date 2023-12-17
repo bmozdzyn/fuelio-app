@@ -1,1 +1,29 @@
-<p>signin works!</p>
+<div class="main-container">
+  <form [formGroup]="form">
+    <p class="form-title">Sign in</p>
+    <mat-form-field class="input-container">
+      <mat-label>Email </mat-label>
+      <input type="email" matInput placeholder="Ex pat@example.com" formControlName="email">
+      @if(form.get('email')!.hasError('required')) {
+        <mat-error>Email is required</mat-error>
+      }
+      @if(form.get('email')!.hasError('email')) {
+        <mat-error>Email is invalid</mat-error>
+      }
+    </mat-form-field>
+    <mat-form-field class="input-container">
+      <mat-label>Password </mat-label>
+      <input type="password" matInput placeholder="Password" formControlName="password">
+      @if(form.get('password')!.hasError('required')) {
+        <mat-error>Password is required</mat-error>
+      }
+    </mat-form-field>
+    <div class="recover-btn-container">
+      <button test-id="recover-password-button"
+      [disabled]="!form.get('email')!.valid" mat-button>Recover password</button>
+    </div>
+    <button mat-raised-button color="primary" test-id="login-button"
+      [disabled]="!form.valid">Login</button>
+    <button mat-stroked-button color="primary">Register</button>
+  </form>
+</div>
